@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface ProductMapper {
-    @Select("select * from product ")
-    List<Product> list();
+    @Select("select * from product where shop_id = #{shopId}")
+    List<Product> list(Integer shopId);
 
     void delete(List<Integer> ids);
 

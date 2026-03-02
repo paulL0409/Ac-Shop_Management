@@ -19,8 +19,9 @@ public class ProductController {
 
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
-        PageBean pageBean = productService.page(page, pageSize);
+                       @RequestParam(defaultValue = "10") Integer pageSize,
+                       Integer shopId){
+        PageBean pageBean = productService.page(page, pageSize, shopId);
         return Result.success(pageBean);
     }
 

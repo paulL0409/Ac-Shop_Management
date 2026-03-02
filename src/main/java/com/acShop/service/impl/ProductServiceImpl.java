@@ -3,11 +3,9 @@ package com.acShop.service.impl;
 import com.acShop.mapper.ProductMapper;
 import com.acShop.pojo.PageBean;
 import com.acShop.pojo.Product;
-import com.acShop.pojo.User;
 import com.acShop.service.ProductService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import org.springframework.aop.framework.ProxyProcessorSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +18,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public PageBean page(Integer page, Integer pageSize) {
+    public PageBean page(Integer page, Integer pageSize, Integer shopId) {
         PageHelper.startPage(page,pageSize);
-        List<Product> productList = productMapper.list();
+        List<Product> productList = productMapper.list(shopId);
         Page<Product> p = (Page<Product>)productList;
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;

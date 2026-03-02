@@ -6,7 +6,7 @@ import com.acShop.pojo.Product;
 import java.util.List;
 
 public interface ProductService {
-    PageBean page(Integer page, Integer pageSize);
+    PageBean page(Integer page, Integer pageSize, Integer shopId);
 
     void delete(List<Integer> ids);
 
