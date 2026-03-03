@@ -18,6 +18,12 @@
             <if test="name != null">
                 name = #{name},
             </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="imageUrl != null">
+                image_url = #{imageUrl},
+            </if>
         </set>
         where id = #{id}
     </update>

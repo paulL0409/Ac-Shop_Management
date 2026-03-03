@@ -14,4 +14,6 @@ public class Shop {
     private Long ownerId;            // 對應 owner_id
     private String name;
     private LocalDateTime createTime;
+    private String description;
+    private String imageUrl;
 }

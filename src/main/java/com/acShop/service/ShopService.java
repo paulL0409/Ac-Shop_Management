@@ -1,6 +1,7 @@
 package com.acShop.service;
 
 import com.acShop.pojo.PageBean;
+import com.acShop.pojo.Result;
 import com.acShop.pojo.Shop;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface ShopService {
     void add(Shop shop);
 
     void update(Shop shop);
+
+    Shop getByOwnerId(Long userId);
 }
