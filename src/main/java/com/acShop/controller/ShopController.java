@@ -4,10 +4,14 @@ import com.acShop.pojo.PageBean;
 import com.acShop.pojo.Result;
 import com.acShop.pojo.Shop;
 import com.acShop.service.ShopService;
+import com.acShop.utils.JwtUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -39,5 +43,14 @@ public class ShopController {
     public Result update(@RequestBody Shop shop){
         shopService.update(shop);
         return Result.success();
+    }
+
+    @GetMapping("/my")
+    public Result getShop(HttpServletRequest request){
+        String token = request.getHeader("token");
+        Map<String, Object> claims = JwtUtils.parseJwt(token);
+        Long userId = ((Number) claims.get("id")).longValue();
+        Shop shop = shopService.getByOwnerId(userId);
+        return Result.success(shop);
     }
 }

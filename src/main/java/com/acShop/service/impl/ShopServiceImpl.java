@@ -2,6 +2,7 @@ package com.acShop.service.impl;
 
 import com.acShop.mapper.ShopMapper;
 import com.acShop.pojo.PageBean;
+import com.acShop.pojo.Result;
 import com.acShop.pojo.Shop;
 import com.acShop.pojo.User;
 import com.acShop.service.ShopService;
@@ -20,9 +21,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public PageBean page(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         List<Shop> shopList = shopMapper.list();
-        Page<Shop> p = (Page<Shop>)shopList;
+        Page<Shop> p = (Page<Shop>) shopList;
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;
     }
@@ -42,4 +43,11 @@ public class ShopServiceImpl implements ShopService {
     public void update(Shop shop) {
         shopMapper.update(shop);
     }
+
+    @Override
+    public Shop getByOwnerId(Long userId) {
+        Shop shop = shopMapper.getByOwnerId(userId);
+        return shop;
+    }
+
 }
