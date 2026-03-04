@@ -10,8 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Select("select * from user ")
-    List<User> list();
+    List<User> list(String username,  String role);
 
     void delete(List<Integer> ids);
 

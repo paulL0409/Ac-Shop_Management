@@ -3,6 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acShop.mapper.UserMapper">
+    <select id="list">
+        select * from user
+        <where>
+            <if test="username != null">
+                username like concat('%', #{username}, '%')
+            </if>
+            <if test="role != null">
+                and role = #{role}
+            </if>
+        </where>
+    </select>
     <delete id="delete">
         delete from user where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">

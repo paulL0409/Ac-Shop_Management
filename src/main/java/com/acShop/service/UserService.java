@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    PageBean page(Integer page, Integer pageSize);
+    PageBean page(Integer page, Integer pageSize, String username,  String role);
 
     void delete(List<Integer> ids);
 

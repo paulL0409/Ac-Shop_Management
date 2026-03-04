@@ -17,8 +17,9 @@ public class UserController {
 
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
-        PageBean pageBean = userService.page(page, pageSize);
+                       @RequestParam(defaultValue = "10") Integer pageSize,
+                       String username,  String role){
+        PageBean pageBean = userService.page(page, pageSize, username, role);
         return Result.success(pageBean);
     }
 

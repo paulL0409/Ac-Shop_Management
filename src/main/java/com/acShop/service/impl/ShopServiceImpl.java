@@ -20,9 +20,9 @@ public class ShopServiceImpl implements ShopService {
     private ShopMapper shopMapper;
 
     @Override
-    public PageBean page(Integer page, Integer pageSize) {
+    public PageBean page(Integer page, Integer pageSize, String name) {
         PageHelper.startPage(page, pageSize);
-        List<Shop> shopList = shopMapper.list();
+        List<Shop> shopList = shopMapper.list(name);
         Page<Shop> p = (Page<Shop>) shopList;
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;

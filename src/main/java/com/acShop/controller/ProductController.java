@@ -9,6 +9,7 @@ import com.acShop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,8 @@ public class ProductController {
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
-                       Integer shopId){
-        PageBean pageBean = productService.page(page, pageSize, shopId);
+                       Integer shopId, String name, BigDecimal begin, BigDecimal end){
+        PageBean pageBean = productService.page(page, pageSize, shopId, name, begin, end);
         return Result.success(pageBean);
     }
 

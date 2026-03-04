@@ -12,8 +12,7 @@ import java.util.List;
 
 @Mapper
 public interface ShopMapper {
-    @Select("select * from shop ")
-    List<Shop> list();
+    List<Shop> list(String name);
 
     void delete(List<Integer> ids);
 

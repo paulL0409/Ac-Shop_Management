@@ -22,8 +22,9 @@ public class ShopController {
 
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
-        PageBean pageBean = shopService.page(page, pageSize);
+                       @RequestParam(defaultValue = "10") Integer pageSize,
+                       String name){
+        PageBean pageBean = shopService.page(page, pageSize, name);
         return Result.success(pageBean);
     }
 

@@ -5,12 +5,12 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
 public interface ProductMapper {
-    @Select("select * from product where shop_id = #{shopId}")
-    List<Product> list(Integer shopId);
+    List<Product> list(Integer shopId, String name, BigDecimal begin, BigDecimal end);
 
     void delete(List<Integer> ids);
 

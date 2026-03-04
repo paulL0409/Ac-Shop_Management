@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public PageBean page(Integer page, Integer pageSize, Integer shopId) {
+    public PageBean page(Integer page, Integer pageSize, Integer shopId, String name, BigDecimal begin, BigDecimal end) {
         PageHelper.startPage(page,pageSize);
-        List<Product> productList = productMapper.list(shopId);
+        List<Product> productList = productMapper.list(shopId, name, begin, end);
         Page<Product> p = (Page<Product>)productList;
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;
