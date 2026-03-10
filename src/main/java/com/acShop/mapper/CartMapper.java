@@ -30,4 +30,10 @@ public interface CartMapper {
 
     @Update("update cart set quantity = quantity - 1 where id = #{id}")
     void decrease(Long id);
+
+    @Select("select * from cart where user_id = #{userId}")
+    List<Cart> getCartByUserId(Long userId);
+
+    @Delete("delete from cart where user_id = #{userId}")
+    void deleteByUserId(Long userId);
 }
