@@ -19,4 +19,7 @@ public interface ProductMapper {
     void add(Product product);
 
     void update(Product product);
+
+    @Select("select * from product where id = #{id}")
+    Product getById(Long id);
 }
