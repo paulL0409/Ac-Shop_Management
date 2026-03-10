@@ -59,8 +59,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void add(Order order) {
-        order.setCreateTime(LocalDateTime.now());
-        orderMapper.add(order);
+    public List<Order> listByUserId(Long userId) {
+        return orderMapper.listByUserId(userId);
     }
+
 }

@@ -6,11 +6,9 @@ import com.acShop.service.OrderService;
 import com.acShop.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,11 +17,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping
-    public Result addOrder(@RequestBody Order order){
-        orderService.add(order);
-        return Result.success();
-    }
     @PostMapping("/checkout")
     public Result checkout(HttpServletRequest request){
         String token = request.getHeader("token");
@@ -31,5 +24,14 @@ public class OrderController {
         Long userId = ((Number) claims.get("id")).longValue();
         orderService.checkout(userId);
         return Result.success();
+    }
+
+    @GetMapping
+    public Result list(HttpServletRequest request){
+        String token = request.getHeader("token");
+        Map<String, Object> claims = JwtUtils.parseJwt(token);
+        Long userId = ((Number) claims.get("id")).longValue();
+        List<Order> list = orderService.listByUserId(userId);
+        return Result.success(list);
     }
 }

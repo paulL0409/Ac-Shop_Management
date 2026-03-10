@@ -2,8 +2,10 @@ package com.acShop.service;
 
 import com.acShop.pojo.Order;
 
+import java.util.List;
+
 public interface OrderService {
     void checkout(Long userId);
 
-    void add(Order order);
+    List<Order> listByUserId(Long userId);
 }
