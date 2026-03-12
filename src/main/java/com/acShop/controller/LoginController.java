@@ -21,8 +21,8 @@ public class LoginController {
 
     @PostMapping
     public Result login(@RequestBody User user){
-        User u = userService.login(user);
-        if(u != null){
+        try {
+            User u = userService.login(user);
             Map<String, Object> claims = new HashMap<>();
             claims.put("id", u.getId());
             claims.put("username", u.getUsername());
@@ -30,6 +30,16 @@ public class LoginController {
             String jwt = JwtUtils.generateJwt(claims);
             return Result.success(jwt);
         }
-        return Result.error("Wrong username or password");
+        catch (RuntimeException e){
+            Result r = Result.error(e.getMessage());
+            System.out.println("RETURN RESULT = " + r);
+            return r;
+        }
+    }
+
+    @PostMapping("/add")
+    public Result add(@RequestBody User user) {
+        userService.add(user);
+        return Result.success();
     }
 }

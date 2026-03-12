@@ -20,6 +20,6 @@ public interface UserMapper {
 
     void update(User user);
 
-    @Select("select * from user where username = #{username} and user_password = #{userPassword}")
-    User findUserByNameAndPassword(User user);
+    @Select("select * from user where username = #{username}")
+    User findUserByName(User user);
 }

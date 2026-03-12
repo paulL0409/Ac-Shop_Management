@@ -7,6 +7,7 @@ import com.acShop.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,7 +34,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(user.getUserPassword());
         user.setCreateTime(LocalDateTime.now());
+        user.setUserPassword(hashedPassword);
         userMapper.add(user);
     }
 
@@ -44,6 +48,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) {
-        return userMapper.findUserByNameAndPassword(user);
+        User dbuser = userMapper.findUserByName(user);
+        if(dbuser==null){
+            throw new RuntimeException("User not found");
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if(!encoder.matches(user.getUserPassword(), dbuser.getUserPassword())){
+            throw new RuntimeException("Password incorrect");
+        }
+        return dbuser;
     }
 }
