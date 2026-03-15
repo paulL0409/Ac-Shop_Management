@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ProductMapper productMapper;
     @Override
-    public void checkout(Long userId) {
+    public Long checkout(Long userId) {
         List<Cart> cartList = cartMapper.getCartByUserId(userId);
         BigDecimal totalAmount = BigDecimal.ZERO;
         for (Cart cart : cartList) {
@@ -55,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
         }
         cartMapper.deleteByUserId(userId);
+        return order.getId();
 
     }
 

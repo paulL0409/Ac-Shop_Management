@@ -22,8 +22,7 @@ public class OrderController {
         String token = request.getHeader("token");
         Map<String, Object> claims = JwtUtils.parseJwt(token);
         Long userId = ((Number) claims.get("id")).longValue();
-        orderService.checkout(userId);
-        return Result.success();
+        return Result.success(orderService.checkout(userId));
     }
 
     @GetMapping

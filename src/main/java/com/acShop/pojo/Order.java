@@ -14,4 +14,6 @@ public class Order {
     private BigDecimal totalAmount;
     private String status;
     private LocalDateTime createTime;
+    private String stripePaymentIntentId;
+    private LocalDateTime paidTime;
 }

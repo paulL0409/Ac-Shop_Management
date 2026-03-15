@@ -5,7 +5,7 @@ import com.acShop.pojo.Order;
 import java.util.List;
 
 public interface OrderService {
-    void checkout(Long userId);
+    Long checkout(Long userId);
 
     List<Order> listByUserId(Long userId);
 }
