@@ -3,10 +3,10 @@ spring:
     name: ac-shop-management
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db01
-    username: root
-    password: "@Ntony0409"
+    driver-class-name: ${DB_DRIVER_CLASS_NAME}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
 mybatis:
   configuration:
