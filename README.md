@@ -1,15 +1,15 @@
-## AC Shop – Full-Stack E-commerce Platform
+# AC Shop – Full-Stack E-commerce Platform
 
 A full-stack e-commerce application with role-based access (Customer, Shop Owner, Admin), built to demonstrate scalable backend design and real-world deployment.
 
-# Tech Stack
+## Tech Stack
 
 - Backend: Java, Spring Boot, MyBatis, MySQL
 - Frontend: Vue (Vite), Element Plus, Axios
 - Infra: AWS EC2, RDS, Nginx
 - Auth & Payments: JWT, Stripe
 
-# Features
+## Features
 
 - JWT authentication & role-based authorization
 - Product & shop management (CRUD)
@@ -18,9 +18,9 @@ A full-stack e-commerce application with role-based access (Customer, Shop Owner
 - Pagination & search
 - Optimized queries with indexing
 
-# Run Locally
+## Run Locally
 
-configure environment variables
+### configure environment variables
 
     DB_URL=jdbc:mysql://<RDS-ENDPOINT>:3306/db01
     DB_USERNAME=your_username
@@ -28,18 +28,18 @@ configure environment variables
     STRIPE_SECRET_KEY=your_stripe_secret
     STRIPE_WEBHOOK_SECRET=your_webhook_secret
 
-Let webhook listen to stripe
+### Let webhook listen to stripe
 
     stripe listen --forward-to localhost:8080/payments/webhook
 
-backend
+### backend
     mvn spring-boot:run
 
-frontend
+### frontend
     npm install
     npm run dev
 
-Deployment
+### Deployment
 
 - Backend on EC2 (systemd service)
 - Nginx reverse proxy (/api → 8080)
