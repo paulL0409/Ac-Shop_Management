@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            sudo mv /tmp/ac-shop-backend.tar /opt/ac-shop/ac-shop-backend.tar
+            sudo mv /tmp/artifacts/ac-shop-backend.tar /opt/ac-shop/ac-shop-backend.tar
             sudo docker load -i /opt/ac-shop/ac-shop-backend.tar
             sudo docker rm -f ac-shop-backend || true
             sudo docker run -d \
