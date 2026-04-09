@@ -27,9 +27,9 @@ jobs:
         run: |
           docker build -t ac-shop-backend .
           mkdir -p artifacts
-          docker save ac-shop-backend -o artifacts/ac-shop-backend.tar
-          chmod 644 artifacts/ac-shop-backend.tar
-          ls -l artifacts/ac-shop-backend.tar
+          docker save ac-shop-backend | gzip > artifacts/ac-shop-backend.tar.gz
+          chmod 644 artifacts/ac-shop-backend.tar.gz
+          ls -lh artifacts/ac-shop-backend.tar.gz
 
       - name: Copy image to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_PORT }}
-          source: "artifacts/ac-shop-backend.tar"
+          source: "artifacts/ac-shop-backend.tar.gz"
           target: "/tmp"
 
       - name: Deploy on EC2
@@ -49,8 +49,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            sudo mv /tmp/artifacts/ac-shop-backend.tar /opt/ac-shop/ac-shop-backend.tar
-            sudo docker load -i /opt/ac-shop/ac-shop-backend.tar
+            sudo mv /tmp/artifacts/ac-shop-backend.tar.gz /opt/ac-shop/ac-shop-backend.tar.gz
+            gunzip -c /opt/ac-shop/ac-shop-backend.tar.gz | sudo docker load
             sudo docker rm -f ac-shop-backend || true
             sudo docker run -d \
             --name ac-shop-backend \
